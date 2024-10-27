@@ -3,6 +3,7 @@ CREATE TABLE office_list(
          
 	    office_name varchar(100) primary key          -- 부서명
 );
+
 -- 근로지 정보 테이블
 CREATE TABLE workplace(
     id INT AUTO_INCREMENT PRIMARY KEY,  -- 근로지 번호 (기본 키)
@@ -25,28 +26,29 @@ CREATE TABLE workplace(
     grade INT ,                         -- 선호학년
     summary text NOT NULL,             -- 직무 요약
     notes text,                          -- 특이사항
-    content longtext NOT NULL,- -- 내용수정 편집기능
-    foreign key(office) references office_list(office_name)
+    content longtext NOT NULL, -- 내용수정 편집기능
+    foreign key(office) references office_list(office_name) ON DELETE CASCADE
 );
+
 -- 회원 테이블
 CREATE TABLE member(
-	id INT AUTO_INCREMENT PRIMARY KEY, -- 회원 아이디
-    pw_hash text not null, -- 비밀번호
-    username text not null, -- 이름
-    email text not null, -- 이메일
-    email_verified boolean not null, -- 이메일 인증 여부
-    workplace_id int not null, -- 근로지 아이디
-	foreign key(workplace_id ) references workplace(id)
-     );
-    
+    id INT AUTO_INCREMENT PRIMARY KEY,  -- 회원 아이디
+    pw_hash text NOT NULL,             -- 비밀번호
+    username text NOT NULL,            -- 이름
+    email text NOT NULL,               -- 이메일
+    email_verified boolean NOT NULL,    -- 이메일 인증 여부
+    workplace_id int NOT NULL,         -- 근로지 아이디
+    FOREIGN KEY (workplace_id) REFERENCES workplace(id) ON DELETE CASCADE    -- foreign key 구문 수정
+);
+
 -- 수정기록 테이블
 CREATE TABLE edit_history(
 	id INT AUTO_INCREMENT PRIMARY KEY, 
     workplace_id int not null,
     username text not null ,
     edit_time timestamp not null,
-    content longtext NOT NULL,- -- 내용수정 편집기능...수정한 시점의 데이터. 
-    foreign key(workplace_id) references workplace(id)
+    content longtext NOT NULL,-- 내용수정 편집기능...수정한 시점의 데이터. 
+    foreign key(workplace_id) references workplace(id) ON DELETE CASCADE
 );
  -- 건의게시판 테이블
  CREATE TABLE suggestion(
@@ -55,7 +57,7 @@ CREATE TABLE edit_history(
    title text not null, -- 제목
    content longtext not null, -- 내용
    created timestamp not null, -- 등록일
-   state enum( progress , completed),  not null -- 상태
-    foreign key(user_id) references member(id)
+   state enum( 'progress' , 'completed')  not null ,-- 상태
+    foreign key(user_id) references member(id) ON DELETE CASCADE
 );
- 
+
