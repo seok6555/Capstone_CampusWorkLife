@@ -1,0 +1,63 @@
+-- 부서명 테이블
+CREATE TABLE office_list( 
+         
+	    office_name varchar(100) primary key          -- 부서명
+);
+
+-- 근로지 정보 테이블
+CREATE TABLE workplace(
+    id INT AUTO_INCREMENT PRIMARY KEY,  -- 근로지 번호 (기본 키)
+    office varchar(100) NOT NULL,          -- 부서명
+    manager Text NOT NULL,               -- 담당자
+    phone int NOT NULL,                 -- 전화번호
+    work_start DATE NOT NULL,                       -- 근로기간
+	work_end DATE NOT NULL,                       -- 근로기간
+    time_start TIME NOT NULL,                         -- 근로시간
+	time_end TIME NOT NULL,                         -- 근로시간
+    day_mon boolean NOT NULL ,                   -- 근로요일(월)
+	day_tue boolean NOT NULL ,                   -- 근로요일(화)
+	day_wed boolean NOT NULL ,                   -- 근로요일(수)
+	day_thu boolean NOT NULL ,                   -- 근로요일(목)
+	day_fri boolean NOT NULL ,                   -- 근로요일(금)
+	day_sat boolean NOT NULL ,                   -- 근로요일(토)
+    day_sun boolean NOT NULL ,                   -- 근로요일(일)
+    employee_count INT NOT NULL,                      -- 모집인원
+    department text ,            -- 선호학과
+    grade INT ,                         -- 선호학년
+    summary text NOT NULL,             -- 직무 요약
+    notes text,                          -- 특이사항
+    content longtext NOT NULL, -- 내용수정 편집기능
+    foreign key(office) references office_list(office_name) ON DELETE CASCADE
+);
+
+-- 회원 테이블
+CREATE TABLE member(
+    id INT AUTO_INCREMENT PRIMARY KEY,  -- 회원 아이디
+    pw_hash text NOT NULL,             -- 비밀번호
+    username text NOT NULL,            -- 이름
+    email text NOT NULL,               -- 이메일
+    email_verified boolean NOT NULL,    -- 이메일 인증 여부
+    workplace_id int NOT NULL,         -- 근로지 아이디
+    FOREIGN KEY (workplace_id) REFERENCES workplace(id) ON DELETE CASCADE    -- foreign key 구문 수정
+);
+
+-- 수정기록 테이블
+CREATE TABLE edit_history(
+	id INT AUTO_INCREMENT PRIMARY KEY, 
+    workplace_id int not null,
+    username text not null ,
+    edit_time timestamp not null,
+    content longtext NOT NULL,-- 내용수정 편집기능...수정한 시점의 데이터. 
+    foreign key(workplace_id) references workplace(id) ON DELETE CASCADE
+);
+ -- 건의게시판 테이블
+ CREATE TABLE suggestion(
+   id INT AUTO_INCREMENT PRIMARY KEY,  -- 건의 아이디
+   user_id INT not null, -- 사람 아이디
+   title text not null, -- 제목
+   content longtext not null, -- 내용
+   created timestamp not null, -- 등록일
+   state enum( 'progress' , 'completed')  not null ,-- 상태
+    foreign key(user_id) references member(id) ON DELETE CASCADE
+);
+
