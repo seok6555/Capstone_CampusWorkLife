@@ -1,0 +1,49 @@
+div.admin-container {
+	display: flex;
+	justify-content: space-between;
+	border: 1px solid rgb(238, 238, 238);
+	margin: 0px 100px;
+	font-family: "NanumBarunGothic";
+}
+
+.admin-side-bar ul {
+    list-style-type: none;
+    padding: 10px 30px 10px 15px;
+}
+
+.admin-side-bar li {
+	margin: 40px 0px;
+}
+
+.admin-side-bar a {
+    text-decoration: none; 
+    color: black;
+}
+
+.admin-side-bar a:hover {
+    color: rgb(0, 173, 181);
+}
+
+aside.admin-side-bar {
+	margin: 0px 5px;
+	border: 1px solid rgb(57, 62, 70);
+	width: 233px;
+}
+
+div.admin-page-box {
+    display: block; 
+    width: 100%;
+    padding: 20px;
+}
+
+h1.admin-title {
+	font-weight: bold;
+    font-size: 45px;
+    margin-bottom: 20px; 
+    text-align: center; 
+}
+
+.admin-member-table {
+    border: 1px solid rgb(57, 62, 70);
+    width: 100%; 
+}
