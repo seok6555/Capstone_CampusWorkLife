@@ -1,5 +1,5 @@
 img.logo {
-	width: 20%;
+	width: 100px;
 }
 
 img.background {
@@ -7,7 +7,7 @@ img.background {
 }
 
 img.icon {
-	width: 10%;
+	width: 50%;
 }
 
 div.title {
@@ -17,6 +17,11 @@ div.title {
 
 .title img {
 	height: 100px;
+}
+
+div.scroll_icon {
+	display: flex;
+	justify-content: center;
 }
 
 div.container {
