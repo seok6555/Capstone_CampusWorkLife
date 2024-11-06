@@ -10,38 +10,11 @@ img.icon {
 	width: 50%;
 }
 
-div.title {
-	display: flex;
-	justify-content: space-between;
-}
-
-.title img {
-	height: 100px;
+img.mypage {
+	width: 40px;
 }
 
 div.scroll_icon {
 	display: flex;
 	justify-content: center;
-}
-
-div.container {
-	display: flex;
-	justify-content: space-between;
-	background-color: lightblue;
-	border: 1px solid black;
-}
-
-div.indexList {
-	width: 45%;
-	height: 100px;
-	border: 1px solid black;
-}
-
-div.infoContent {
-	width: 45%;
-	border: 1px solid black;
-}
-
-.infoContent img {
-	width: 100%;
 }

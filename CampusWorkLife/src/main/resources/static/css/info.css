@@ -1,0 +1,37 @@
+div.title {
+	display: flex;
+	justify-content: space-between;
+	height: 50%;
+}
+
+img.like {
+	height: 50px;
+}
+
+div.container {
+	border: 1px solid black;
+}
+
+div.info_intro {
+	display: flex;
+	justify-content: center;
+}
+
+div.info_indexList {
+	width: 20%;
+	border: 1px solid black;
+}
+
+div.info_workplace_image {
+	width: 40%;
+	border: 1px solid black;
+}
+
+.info_workplace_image img {
+	width: 100%;
+}
+
+div.info_workplace_table {
+	width: 40%;
+	border: 1px solid black;
+}
