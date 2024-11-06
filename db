@@ -56,7 +56,7 @@ CREATE TABLE edit_history(
    user_id INT not null, -- 사람 아이디
    title text not null, -- 제목
    content longtext not null, -- 내용
-   created timestamp not null, -- 등록일
+   created timestamp not null DEFAULT CURRENT_TIMESTAMP, -- 등록일
    state enum( 'progress' , 'completed')  not null ,-- 상태
     foreign key(user_id) references member(id) ON DELETE CASCADE
 );
