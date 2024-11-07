@@ -7,6 +7,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import lombok.Data;
 
 @Data
@@ -17,7 +19,7 @@ public class Workplace {
 	    @GeneratedValue(strategy = GenerationType.IDENTITY)
 	    private Integer id;  // 근로지 번호
 
-	    private String office;  // 부서명
+
 	    private String manager;  // 담당자
 	    private Integer phone;  // 전화번호
 	    
@@ -41,4 +43,8 @@ public class Workplace {
 	    private String summary;         // 직무 요약
 	    private String notes;           // 특이사항
 	    private String content;         // 내용
+	    
+	    @ManyToOne
+	    @JoinColumn(name="office") // 부서명,외래키
+	    Officelist officelist;
 }

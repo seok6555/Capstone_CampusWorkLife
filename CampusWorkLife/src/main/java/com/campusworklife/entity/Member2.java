@@ -4,6 +4,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import lombok.Data;
 
@@ -21,6 +23,8 @@ public class Member2 {
 	  private String email;//이메일
 	  private boolean emailVerified; // 이메일 인증 여부
 	  
-	  
+	  @ManyToOne
+	  @JoinColumn(name="workplaceId")//근로지 아이디,외래키
+	  Workplace workplace;
 
 }

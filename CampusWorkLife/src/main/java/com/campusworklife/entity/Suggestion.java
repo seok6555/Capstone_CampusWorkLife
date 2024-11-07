@@ -6,6 +6,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import lombok.Data;
 
 @Data
@@ -16,11 +18,13 @@ public class Suggestion {
 	    @GeneratedValue(strategy = GenerationType.IDENTITY)
 	    private Integer id;               // 건의 아이디
 	    
-	    private Integer userId;           // 사람 아이디,외래키 
+	    
 	    private String title;             // 제목
 	    private String content;           // 내용
 	    private  LocalDateTime created;        // 등록일
 	    private String state;             // 상태 (progress or completed)
 	
-
+       @ManyToOne
+       @JoinColumn(name="userId")// 사람 아이디,외래키 
+       Member2 member2;
 }
