@@ -6,25 +6,42 @@ div.title {
 
 img.like {
 	height: 50px;
+	margin-top: 1%;
 }
 
 div.container {
 	border: 1px solid black;
+	border-radius: 15px;
 }
 
-div.info_intro {
-	display: flex;
-	justify-content: center;
-}
 
 div.info_indexList {
 	width: 20%;
+}
+
+ol.info_index {
 	border: 1px solid black;
+	border-radius: 15px;
+	padding-left: 20%;
+}
+
+ol.info_index a {
+	text-decoration: none;
+	color: black;
+}
+
+div.info_context {
+	width: 80%;
+}
+
+div.info_context_intro {
+	display: flex;
+	justify-content: center;
+	
 }
 
 div.info_workplace_image {
-	width: 40%;
-	border: 1px solid black;
+	width: 50%;
 }
 
 .info_workplace_image img {
@@ -32,6 +49,20 @@ div.info_workplace_image {
 }
 
 div.info_workplace_table {
-	width: 40%;
-	border: 1px solid black;
+	text-align: center;
+	width: 50%;
+}
+
+div.info_context_main {
+	display: flex;
+}
+
+ol.info_context_main_index li {
+	font-size: xx-large;
+	font-weight: bold;
+}
+
+ol.info_context_main_index button {
+	font-size: xx-large;
+	font-weight: bold;
 }
