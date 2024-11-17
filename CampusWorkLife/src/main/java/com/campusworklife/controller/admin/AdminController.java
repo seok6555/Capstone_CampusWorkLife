@@ -13,10 +13,14 @@ import com.campusworklife.mapper.MemberMapper;
 @RequestMapping("admin")
 public class AdminController {
 	
+	@Autowired
+	private MemberMapper memberMapper;
+	
 	@GetMapping("memAdminPage")
 	public String memAdminPage(Model model) {
 		String pageTitle = "회원관리";
-		model.addAttribute("message", pageTitle);
+		List<Member> members = memberMapper.findAll();
+		model.addAttribute("members", members);
 		return "admin/memAdminPage";
 	}
 	
