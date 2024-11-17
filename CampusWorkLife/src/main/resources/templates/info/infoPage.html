@@ -11,9 +11,9 @@
 	<body>
 		<nav th:replace="~{navbar/navbar :: navbarFragment}"></nav>
 		
-		<div class="container">
+		<div class="container" th:each="wp : ${workplaces}">
 			<div class="title">
-				<p th:text="${message}" class="fs-1 fw-bold">메시지가 없습니다</p>
+				<p th:text="${wp.officelist.officeName}" class="fs-1 fw-bold">근로지명</p>
 				<img class="like" src="/images/like.png" alt="찜하기 이미지">
 			</div>
 			<div class="row justify-content-center">
@@ -36,35 +36,35 @@
 								<tbody>
 								    <tr>
 								        <th scope="row">담당자</th>
-								        <td>홍길동</td>
+								        <td th:text="${wp.manager}">담당자명</td>
 										<th scope="row">전화번호</th>
-								        <td>02-2610-0000</td>
+								        <td th:text="${wp.phone}">부서 전화번호</td>
 								    </tr>
 								    <tr>
 								        <th scope="row">근로기간</th>
-							            <td>24.00.00 ~ 24.00.00</td>
+							            <td th:text="${wp.workStart} + ' ~ ' + ${wp.workEnd}">근로기간</td>
 							            <th scope="row">근로시간</th>
-							            <td>09:00 ~ 17:00</td>
+							            <td th:text="${wp.timeStart} + ' ~ ' + ${wp.timeEnd}">근로시간</td>
 							        </tr>
-									<tr>
+									<tr th:each="wd : ${workdays}">
 										<th scope="row">근로요일</th>
-										<td>월, 화, 수, 목, 금</td>
+										<td><span th:each="day : ${wd.workDays}" th:text="${day} + ' '">근로요일</span></td>
 							            <th scope="row">모집인원</th>
-							            <td>0</td>
+							            <td th:text="${wp.employeeCount}">모집인원</td>
 									</tr>
 									<tr>
 										<th scope="row">선호학과</th>
-										<td>상관없음</td>
+										<td th:text="${wp.department}">선호학과</td>
 										<th scope="row">선호학년</th>
-										<td>상관없음</td>
+										<td th:text="${wp.grade}">선호학년</td>
 									</tr>
 									<tr>
 										<th scope="row">직무요약</th>
-										<td colspan="3">상세 직무 내용 작성</td>
+										<td colspan="3" th:text="${wp.summary}">상세 직무 내용 작성</td>
 									</tr>
 									<tr>
 										<th scope="row">특이사항</th>
-										<td colspan="3">특이사항 작성</td>
+										<td colspan="3" th:text="${wp.notes}">특이사항 작성</td>
 									</tr>
 							    </tbody>
 							</table>
@@ -81,10 +81,8 @@
 								<hr>
 							</li>
 							<div class="collapse" id="collapseContext1">
-								<div class="card card-body">
-									목록에 관한 상세 내용이 작성됩니다. 
-									해당 근로 업무에 관한 내용이며, 
-									사진 자료 등을 통해 상세히 서술되어 근로를 처음 배우는 학생들도 바로바로 찾아보며 근로 업무에 적응할 수 있도록 돕습니다.
+								<div class="card card-body" th:text="${wp.content}">
+									근로 내용
 								</div>
 							</div>
 							<li>
@@ -96,10 +94,8 @@
 								<hr>
 							</li>
 							<div class="collapse" id="collapseContext2">
-								<div class="card card-body">
-									목록에 관한 상세 내용이 작성됩니다. 
-									해당 근로 업무에 관한 내용이며, 
-									사진 자료 등을 통해 상세히 서술되어 근로를 처음 배우는 학생들도 바로바로 찾아보며 근로 업무에 적응할 수 있도록 돕습니다.
+								<div class="card card-body" th:text="${wp.content}">
+									근로 내용
 								</div>
 							</div>
 							<li>
@@ -111,10 +107,8 @@
 								<hr>
 							</li>
 							<div class="collapse" id="collapseContext3">
-								<div class="card card-body">
-									목록에 관한 상세 내용이 작성됩니다. 
-									해당 근로 업무에 관한 내용이며, 
-									사진 자료 등을 통해 상세히 서술되어 근로를 처음 배우는 학생들도 바로바로 찾아보며 근로 업무에 적응할 수 있도록 돕습니다.
+								<div class="card card-body" th:text="${wp.content}">
+									근로 내용
 								</div>
 							</div>
 							<li>
@@ -126,10 +120,8 @@
 								<hr>
 							</li>
 							<div class="collapse" id="collapseContext4">
-								<div class="card card-body">
-									목록에 관한 상세 내용이 작성됩니다. 
-									해당 근로 업무에 관한 내용이며, 
-									사진 자료 등을 통해 상세히 서술되어 근로를 처음 배우는 학생들도 바로바로 찾아보며 근로 업무에 적응할 수 있도록 돕습니다.
+								<div class="card card-body" th:text="${wp.content}">
+									근로 내용
 								</div>
 							</div>
 						</ol>
