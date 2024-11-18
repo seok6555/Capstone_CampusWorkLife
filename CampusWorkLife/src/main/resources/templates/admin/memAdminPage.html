@@ -39,9 +39,9 @@
 						<td th:text="${user.id}"></td>
 						<td th:text="${user.username}"></td>
 						<td th:text="${user.email}"></td>
-						<td th:each="office: ${offices}"
+						<td th:each="office: ${offices}" 
 							th:text="${office.officeName}"></td>
-						<td th:text="${user.joinDate}"></td>
+						<td th:text="${user.formattedJoinDate}"></td>
 					</tr>
 				</tbody>
 			</table>

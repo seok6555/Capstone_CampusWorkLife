@@ -23,7 +23,7 @@ public class AdminController {
 
 	@GetMapping("memAdminPage")
 	public String memAdminPage(Model model) {
-		String pageTitle = "회원관리";
+		//String pageTitle = "회원관리";
 		List<Member> members = memberMapper.findAll();
 		List<Officelist> offices = officelistRepository.findAll();
 		model.addAttribute("members", members);
