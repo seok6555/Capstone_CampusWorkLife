@@ -1,0 +1,55 @@
+div.title {
+	display: flex;
+	justify-content: space-between;
+	height: 50%;
+}
+
+
+
+div.container {
+ border: 1px solid #ddd;
+    border-radius: 15px;
+    padding: 20px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    background-color: white;
+    min-height: 800px;        /* 높이 증가 */
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    width: 90%;              /* 너비 증가 */
+    max-width: 1400px;       /* 최대 너비 증가 */
+    margin-left: auto;
+    margin-right: auto;
+}
+h1 {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.suggestion-form {
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+.suggestion-form h2 {
+    text-align: center;
+    margin-bottom: 30px;
+    color: #333;
+}
+
+.button-group {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.button-group button, .button-group a {
+    margin: 0 10px;
+}
+
+
+
+
+

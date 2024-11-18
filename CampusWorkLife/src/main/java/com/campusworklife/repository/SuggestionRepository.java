@@ -1,11 +1,14 @@
 package com.campusworklife.repository;
 
+import java.util.Optional;
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
+import com.campusworklife.entity.Member2;
 import com.campusworklife.entity.Suggestion;
 
 
@@ -28,6 +31,5 @@ public interface SuggestionRepository extends JpaRepository<Suggestion,Integer> 
     // 작성자 이름으로 검색
     @Query("SELECT s FROM Suggestion s JOIN s.member2 m WHERE m.username LIKE %:username%")
     Page<Suggestion> findByMemberUsernameContaining(@Param("username") String username, Pageable pageable);
-    
-    
+   
 }
