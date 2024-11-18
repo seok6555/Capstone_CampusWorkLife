@@ -38,6 +38,7 @@ CREATE TABLE member(
     email text NOT NULL,               -- 이메일
     email_verified boolean NOT NULL,    -- 이메일 인증 여부
     workplace_id int NOT NULL,         -- 근로지 아이디
+   join_date DATETIME DEFAULT CURRENT_TIMESTAMP,--회원가입일자
     FOREIGN KEY (workplace_id) REFERENCES workplace(id) ON DELETE CASCADE    -- foreign key 구문 수정
 );
 
