@@ -1,6 +1,7 @@
 package com.campusworklife.entity;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -27,4 +28,10 @@ public class Suggestion {
        @ManyToOne
        @JoinColumn(name="userId")// 사람 아이디,외래키 
        Member2 member2;
+       
+       //날짜 포맷
+       public String getFormattedCreated() {
+           DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy.MM.dd");
+           return created.format(formatter);
+       }
 }

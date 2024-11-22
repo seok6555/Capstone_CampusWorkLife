@@ -1,5 +1,7 @@
 package com.campusworklife.repository;
 
+import java.util.List;
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -28,6 +30,10 @@ public interface SuggestionRepository extends JpaRepository<Suggestion,Integer> 
     // 작성자 이름으로 검색
     @Query("SELECT s FROM Suggestion s JOIN s.member2 m WHERE m.username LIKE %:username%")
     Page<Suggestion> findByMemberUsernameContaining(@Param("username") String username, Pageable pageable);
+    
+    // 진행중인 건의사항만
+    @Query("SELECT s FROM Suggestion s WHERE s.state = :state")
+    List<Suggestion> findByState(@Param("state") String state);
     
     
 }

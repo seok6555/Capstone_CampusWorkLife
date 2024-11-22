@@ -33,6 +33,11 @@
 					</tr>
 				</thead>
 				<tbody>
+					<tr th:each="st : ${suggestions}">
+						<td th:text="${st.title}"></td>
+						<td th:text="${st.member2.username}"></td>
+						<td th:text="${st.formattedCreated}"></td>
+					</tr>
 				</tbody>
 			</table>
 		</div>
