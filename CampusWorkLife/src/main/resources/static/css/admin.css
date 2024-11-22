@@ -68,3 +68,13 @@ h1.admin-title {
 .admin-member-tbody tr:hover {
 	color: rgb(0, 173, 181);
 }
+
+.delete-btn{
+    background-color: rgb(0, 173, 173); 
+    color: white; 
+    border: none;
+    padding: 8px 8px; 
+    cursor: pointer;
+    font-size: 15px; 
+    border-radius: 5px;
+}

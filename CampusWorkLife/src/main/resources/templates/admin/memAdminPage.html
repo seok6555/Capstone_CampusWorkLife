@@ -32,6 +32,7 @@
 						<th>이메일</th>
 						<th>근로지</th>
 						<th>가입일자</th>
+						<th>관리</th>
 					</tr>
 				</thead>
 				<tbody class="admin-member-tbody">
@@ -39,9 +40,15 @@
 						<td th:text="${user.id}"></td>
 						<td th:text="${user.username}"></td>
 						<td th:text="${user.email}"></td>
-						<td th:each="office: ${offices}" 
-							th:text="${office.officeName}"></td>
+						<td th:each="office: ${offices}" th:text="${office.officeName}"></td>
 						<td th:text="${user.formattedJoinDate}"></td>
+						<form action="/admin/edit" method="post">
+							<input type="hidden" name="username" th:value="${user.username}" />
+							<td>
+								<button class="delete-btn" name="cmd" value="delete"
+									type="submit" th:onclick="return confirm('삭제하시겠습니까?')">회원 삭제</button>
+							</td>
+						</form>
 					</tr>
 				</tbody>
 			</table>
@@ -50,6 +57,8 @@
 	<script
 		src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
 		integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
-		crossorigin="anonymous"></script>
+		crossorigin="anonymous">
+		
+	</script>
 </body>
 </html>
