@@ -73,10 +73,11 @@
 					<div class="info_context_main">
 						<ol class="info_context_main_index">
 							<li>
-								<p class="d-inline-flex gap-1" id="index1">
+								<p class="d-inline-flex gap-1 d-md-flex justify-content-md-between" id="index1">
 								  	<button class="btn btn-lg" type="button" data-bs-toggle="collapse" data-bs-target="#collapseContext1" aria-expanded="false" aria-controls="collapseContext1">
 										목록
 								  	</button>
+									<button class="btn btn-sm" type="button">편집</button>
 								</p>
 								<hr>
 							</li>
@@ -84,6 +85,11 @@
 								<div class="card card-body" th:text="${wp.content}">
 									근로 내용
 								</div>
+								<form method="post" th:action="@{/info/infoPage}">
+								<input type="text" id="content" name="content">
+								<button type="submit">저장</button>
+									
+								</form>
 							</div>
 							<li>
 								<p class="d-inline-flex gap-1" id="index2">
