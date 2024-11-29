@@ -44,11 +44,11 @@ h1.admin-title {
 	text-align: center;
 }
 
-.admin-member-table {
+.admin-table {
 	width: 100%;
 }
 
-.admin-member-table th {
+.admin-table th {
 	padding: 7px;
 	border-top: 2px solid gray;
 	border-bottom: 2px solid gray;
@@ -57,7 +57,7 @@ h1.admin-title {
 	font-weight: bold;
 }
 
-.admin-member-table td {
+.admin-table td {
 	padding: 7px;
 	border-top: 2px solid rgb(238, 238, 238);
 	border-bottom: 2px solid rgb(238, 238, 238);
@@ -65,16 +65,54 @@ h1.admin-title {
 	border-right: none;
 }
 
-.admin-member-tbody tr:hover {
+.admin-tbody tr:hover {
 	color: rgb(0, 173, 181);
 }
 
-.delete-btn{
+.page-admin-table {
+	width: 100%;
+	table-layout: fixed;
+}
+
+.page-admin-table th {
+	padding: 7px;
+	border-top: 2px solid gray;
+	border-bottom: 2px solid gray;
+	border-left: none;
+	border-right: none;
+	font-weight: bold;
+}
+
+.page-admin-table td {
+	padding: 7px;
+	border-top: 2px solid rgb(238, 238, 238);
+	border-bottom: 2px solid rgb(238, 238, 238);
+	border-left: none;
+	border-right: none;
+}
+
+.page-admin-tbody a {
+	text-decoration: none;
+	color: black;
+	display: block;
+}
+
+.page-admin-tbody a:hover {
+	color: rgb(0, 173, 181);
+}
+
+.col no-wrap {
+    white-space: nowrap; /* 줄바꿈 방지 */
+}
+
+
+.admin-btn{
     background-color: rgb(0, 173, 173); 
     color: white; 
     border: none;
-    padding: 8px 8px; 
+    padding: 8px 15px; 
     cursor: pointer;
     font-size: 15px; 
     border-radius: 5px;
 }
+

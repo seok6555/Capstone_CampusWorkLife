@@ -47,4 +47,13 @@ public class Workplace {
 	    @ManyToOne
 	    @JoinColumn(name="office") // 부서명,외래키
 	    Officelist officelist;
+	    
+	   
+	    public void setContent(String content) {
+	        this.content = content;
+	    }
+
+	    public String getContent() {
+	        return content;
+	    }
 }

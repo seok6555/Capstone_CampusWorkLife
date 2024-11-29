@@ -24,17 +24,42 @@
 		</aside>
 		<div class="admin-page-box">
 			<h1 class="admin-title">페이지 관리</h1>
-			<table class="admin-member-table">
+			<table class="page-admin-table">
 				<thead>
 					<tr>
 						<th>근로지</th>
 						<th>기존 내용</th>
 						<th>수정된 내용</th>
+						<th>관리</th>
 					</tr>
 				</thead>
-				<tbody>
+				<tbody class="page-admin-tbody">
+					<tr th:each="historyView : ${historyViews}">
+						<td colspan="4"><a th:href="@{/info/infoPage}">
+								<div class="row">
+									<div class="col">
+										<span
+											th:text="${historyView['editHistory'].workplace.officelist.officeName}">근로지
+											이름</span>
+									</div>
+									<div class="col" th:text="${historyView['oldContent']}">기존
+										내용</div>
+									<div class="col"
+										th:text="${historyView['editHistory'].content}">수정된 내용</div>
+									<div class="col no-wrap">
+										<form th:action="@{/admin/rollbackEdit}" method="post"
+											style="display: inline;">
+											<input type="hidden" name="historyId"
+												th:value="${historyView['editHistory'].id}">
+											<button class="admin-btn" type="submit">되돌리기</button>
+										</form>
+									</div>
+								</div>
+						</a></td>
+					</tr>
 				</tbody>
 			</table>
+
 		</div>
 	</div>
 	<script

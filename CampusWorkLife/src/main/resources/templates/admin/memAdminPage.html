@@ -24,7 +24,7 @@
 		</aside>
 		<div class="admin-page-box">
 			<h1 class="admin-title">회원관리</h1>
-			<table class="admin-member-table">
+			<table class="admin-table">
 				<thead>
 					<tr>
 						<th>ID</th>
@@ -35,7 +35,7 @@
 						<th>관리</th>
 					</tr>
 				</thead>
-				<tbody class="admin-member-tbody">
+				<tbody class="admin-tbody">
 					<tr th:each="user: ${members}">
 						<td th:text="${user.id}"></td>
 						<td th:text="${user.username}"></td>
@@ -45,7 +45,7 @@
 						<form action="/admin/edit" method="post">
 							<input type="hidden" name="username" th:value="${user.username}" />
 							<td>
-								<button class="delete-btn" name="cmd" value="delete"
+								<button class="admin-btn" name="cmd" value="delete"
 									type="submit" th:onclick="return confirm('삭제하시겠습니까?')">회원 삭제</button>
 							</td>
 						</form>
