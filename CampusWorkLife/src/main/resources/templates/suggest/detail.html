@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>건의 사항</title>
+    <!-- Add your CSS styles here -->
+</head>
+<body>
+    <div class="container">
+        <h1>건의 사항</h1>
+        
+        <div class="suggestion-detail">
+            <div class="suggestion-header">
+                <h2 th:text="${suggestion.title}">제목</h2>
+                <div class="metadata">
+                    <span th:text="${#temporals.format(suggestion.created, 'yyyy-MM-dd HH:mm')}">작성일</span>
+                    <span th:text="${suggestion.member2.username}">작성자</span>
+                    <span th:text="${suggestion.state}">상태</span>
+                </div>
+            </div>
+            
+            <div class="suggestion-content" th:text="${suggestion.content}">
+                내용
+            </div>
+            
+            <div class="button-group" th:if="${isAuthor}">
+                <a th:href="@{'/suggest/edit/' + ${suggestion.id}}" class="btn btn-primary">수정</a>
+                <form th:action="@{'/suggest/delete/' + ${suggestion.id}}" method="post" style="display: inline;">
+                    <button type="submit" class="btn btn-danger" 
+                            onclick="return confirm('정말로 삭제하시겠습니까?');">삭제</button>
+                </form>
+            </div>
+            
+            <div class="navigation">
+                <a href="/suggest/list" class="btn btn-secondary">목록으로</a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+
