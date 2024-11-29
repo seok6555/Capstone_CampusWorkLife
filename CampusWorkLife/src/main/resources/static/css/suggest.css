@@ -4,55 +4,111 @@ div.title {
 	height: 50%;
 }
 
-
-
 div.container {
- border: 1px solid #ddd;
-    border-radius: 15px;
-    padding: 20px;
-    margin-top: 20px;
-    margin-bottom: 20px;
-    background-color: white;
-    min-height: 800px;        /* 높이 증가 */
-    box-shadow: 0 0 10px rgba(0,0,0,0.1);
-    width: 90%;              /* 너비 증가 */
-    max-width: 1400px;       /* 최대 너비 증가 */
-    margin-left: auto;
-    margin-right: auto;
+	border: 1px solid #ddd;
+	border-radius: 15px;
+	padding: 20px;
+	margin-top: 20px;
+	margin-bottom: 20px;
+	background-color: white;
+	min-height: 800px; /* 높이 증가 */
+	box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+	width: 90%; /* 너비 증가 */
+	max-width: 1400px; /* 최대 너비 증가 */
+	margin-left: auto;
+	margin-right: auto;
+	
 }
 
 h1 {
-    text-align: center;
-    margin-bottom: 30px;
-     font-size: xx-large;
+	text-align: center;
+	margin-bottom: 30px;
+	font-size: xx-large;
 	font-weight: bold !important;
 }
 
 .suggestion-form {
-    max-width: 800px;
-    margin: 20px auto;
-    padding: 20px;
-    background-color: white;
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+	max-width: 800px;
+	margin: 20px auto;
+	padding: 20px;
+	background-color: white;
+	border-radius: 10px;
+	box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
 .suggestion-form h2 {
-    text-align: center;
-    margin-bottom: 30px;
-    color: #333;
+	text-align: center;
+	margin-bottom: 30px;
+	color: #333;
 }
 
 .button-group {
-    text-align: center;
-    margin-top: 20px;
+	text-align: center;
+	margin-top: 20px;
 }
 
 .button-group button, .button-group a {
-    margin: 0 10px;
+	margin: 0 10px;
+}
+
+/*
+detail.html 관련 css
+*/
+
+.suggestion-h1{
+	color: black;
+	padding: 20px;
+	margin-top: 20px;
 }
 
 
+.suggestion-header h2{
+	font-size: 18px;
+	border: 2px solid rgb(238, 238, 238);
+	padding: 10px;
+}
 
 
+.suggestion-header {
+	margin-bottom: 15px;
+}
 
+.form-label-title {
+	font-weight: bold;
+	margin-bottom: 5px;
+}
+
+.metadata {
+	display: flex;
+	weight:100%;
+	margin: 15px 0px 30px 0px;
+	font-size: 0.9em;
+	color: #666;
+	justify-content: flex-end;
+
+}
+
+.meta-item {
+    display: flex;
+    margin: 3px 5px;
+}
+
+strong {
+    margin-right: 5px; 
+}
+
+.form-label-content{
+	font-weight: bold;
+	margin-bottom: 5px;
+}
+
+.suggestion-content{
+	font-size: 18px;
+	border: 2px solid rgb(238, 238, 238);
+	padding: 10px 10px 50px 10px;
+	
+}
+
+.navigation {
+	margin-top: 20px;
+}
