@@ -32,6 +32,18 @@
         .logout-btn:hover {
             background-color: #c82333;
         }
+        
+        .admin-link {
+			padding-bottom: 20px;
+        }
+         .admin-link a{
+         	color: black;
+         	text-decoration: none;
+        }
+        .admin-link a:hover{
+        	color: rgb(0, 173, 181);
+        }
+        
     </style>
 </head>
 <body>
@@ -40,6 +52,14 @@
             <div class="welcome-message">
                 <span th:text="${username}">사용자</span>님 환영합니다
             </div>
+            
+            <!-- 관리자 링크 -->
+            <div th:if="${isAdmin}" class="admin-link">
+            	<a th:href="@{/admin/memAdminPage}">관리자 페이지로 이동</a>
+            </div>
+            
+            
+            
             <form action="/member/logout" method="post">
                 <button type="submit" class="logout-btn">로그아웃</button>
             </form>

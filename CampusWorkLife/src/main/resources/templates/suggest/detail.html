@@ -11,9 +11,11 @@
 <link th:href="@{/css/suggest.css}" rel="stylesheet">
 <body>
 	<nav th:replace="~{navbar/navbar :: navbarFragment}"></nav>
+
 	<div class="container">
 		<h1 class="suggestion-h1">건의 사항</h1>
 		<div class="suggestion-detail">
+
 			<div class="suggestion-header">
 				<div class="metadata">
 					<div class="meta-item">
@@ -23,17 +25,18 @@
 					<div class="meta-item">
 						<strong>작성일:</strong> <span
 							th:text="${#temporals.format(suggestion.created, 'yyyy-MM-dd HH:mm')}">작성일
-							</span>
+						</span>
 					</div>
 					<div class="meta-item">
-						<strong>상태:</strong> 
-						<span th:if="${suggestion.state == 'progress'}">진행중</span>
-        				<span th:if="${suggestion.state == 'completed'}">완료</span>
+						<strong>상태:</strong> <span
+							th:if="${suggestion.state == 'progress'}">진행중</span> <span
+							th:if="${suggestion.state == 'completed'}">완료</span>
 					</div>
 				</div>
 				<label for="title" class="form-label-title">제목</label>
 				<h2 th:text="${suggestion.title}">제목</h2>
 			</div>
+
 			<label for="content" class="form-label-content">내용</label>
 			<div class="suggestion-content" th:text="${suggestion.content}">
 				내용</div>
@@ -51,6 +54,10 @@
 			<div class="navigation">
 				<a href="/suggest/list" class="btn btn-secondary">목록으로</a>
 			</div>
+
+			<!-- 관리자 댓글 -->
+			
+			
 		</div>
 	</div>
 	<script

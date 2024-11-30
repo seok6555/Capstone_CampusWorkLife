@@ -50,6 +50,7 @@ public class MemberController {
 	            
 	            session.setAttribute("username", response.getUsername());
 	            session.setAttribute("loggedIn", true);
+	            
                 
 	            // 저장된 returnUrl이 있는지 확인
 	            String returnUrl = (String) session.getAttribute("returnUrl");
@@ -57,7 +58,7 @@ public class MemberController {
 	                session.removeAttribute("returnUrl"); // 사용한 returnUrl 제거
 	                return "redirect:" + returnUrl;
 	            }
-	   
+	            
 	            System.out.println("로그인 성공 - 세션에 저장된 username: " + session.getAttribute("username"));
 	            System.out.println("로그인 상태: " + session.getAttribute("loggedIn"));
 
@@ -80,8 +81,21 @@ public class MemberController {
 	            return "redirect:/member/login";
 	        }
 	        
+	        
 	        String username = (String) session.getAttribute("username");
+	        Boolean isAdmin = (Boolean) session.getAttribute("isAdmin"); 
+	        if(isAdmin == null) {
+	        	isAdmin = false; //초기값
+	        }
+
 	        model.addAttribute("username", username);
+	        
+	        if(username.equals("admin1234")) {			//관리자 아이디로 로그인 여부 확인
+	        	isAdmin = true;
+	        }
+	        
+	        model.addAttribute("isAdmin", isAdmin);		//관리자 여부 전달
+	        System.out.println("isAdmin " +isAdmin);	//확인용
 	        return "member/mypage";
 	    }
 
