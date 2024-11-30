@@ -1,0 +1,118 @@
+div.mypage-container {
+	display: flex;
+	justify-content: space-between;
+	border: 1px solid rgb(238, 238, 238);
+	margin: 0px 100px;
+	font-family: "NanumBarunGothic";
+}
+
+.mypage-side-bar ul {
+	list-style-type: none;
+	padding: 10px 30px 10px 15px;
+}
+
+.mypage-side-bar li {
+	padding: 3px;
+	margin: 30px 0px;
+}
+
+.mypage-side-bar a {
+	text-decoration: none;
+	color: black;
+}
+
+.mypage-side-bar a:hover {
+	color: rgb(0, 173, 181);
+}
+
+aside.mypage-side-bar {
+	margin: 20px 5px;
+	border: 1px solid rgb(57, 62, 70);
+	width: 233px;
+}
+
+div.mypage-page-box {
+	display: block;
+	width: 100%;
+	padding: 20px;
+}
+
+h1.mypage-title {
+	font-weight: bold;
+	font-size: 45px;
+	margin-bottom: 20px;
+	text-align: center;
+}
+
+.mypage-table {
+	width: 100%;
+}
+
+.mypage-table th {
+	padding: 7px;
+	border-top: 2px solid gray;
+	border-bottom: 2px solid gray;
+	border-left: none;
+	border-right: none;
+	font-weight: bold;
+}
+
+.mypage-table td {
+	padding: 7px;
+	border-top: 2px solid rgb(238, 238, 238);
+	border-bottom: 2px solid rgb(238, 238, 238);
+	border-left: none;
+	border-right: none;
+}
+
+.mypage-tbody tr:hover {
+	color: rgb(0, 173, 181);
+}
+
+.page-mypage-table {
+	width: 100%;
+	table-layout: fixed;
+}
+
+.page-mypage-table th {
+	padding: 7px;
+	border-top: 2px solid gray;
+	border-bottom: 2px solid gray;
+	border-left: none;
+	border-right: none;
+	font-weight: bold;
+}
+
+.page-mypage-table td {
+	padding: 7px;
+	border-top: 2px solid rgb(238, 238, 238);
+	border-bottom: 2px solid rgb(238, 238, 238);
+	border-left: none;
+	border-right: none;
+}
+
+.page-mypage-tbody a {
+	text-decoration: none;
+	color: black;
+	display: block;
+}
+
+.page-mypage-tbody a:hover {
+	color: rgb(0, 173, 181);
+}
+
+.col no-wrap {
+    white-space: nowrap; /* 줄바꿈 방지 */
+}
+
+
+.mypage-btn{
+    background-color: rgb(0, 173, 173); 
+    color: white; 
+    border: none;
+    padding: 8px 15px; 
+    cursor: pointer;
+    font-size: 15px; 
+    border-radius: 5px;
+}
+

@@ -1,8 +1,8 @@
 package com.campusworklife.controller;
 
 
-import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -11,9 +11,9 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.campusworklife.dto.LoginRequest;
 import com.campusworklife.dto.LoginResponse;
+import com.campusworklife.dto.UpdateMemberRequest;
 import com.campusworklife.service.MemberService;
 
-import org.springframework.ui.Model;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
@@ -83,6 +83,7 @@ public class MemberController {
 	        
 	        
 	        String username = (String) session.getAttribute("username");
+	        
 	        Boolean isAdmin = (Boolean) session.getAttribute("isAdmin"); 
 	        if(isAdmin == null) {
 	        	isAdmin = false; //초기값
@@ -104,6 +105,40 @@ public class MemberController {
 	    public String logout(HttpSession session) {
 	        session.invalidate();
 	        return "redirect:/";
+	    }
+	    
+	    //수정하기
+	    @PostMapping("/update")
+	    public String updateMember(
+	            @RequestParam("username") String newUsername,
+	            @RequestParam("email") String newEmail,
+	            @RequestParam(value = "password", required = false) String newPassword,
+	            @RequestParam(value = "confirmPassword", required = false) String confirmPassword,
+	            HttpSession session,
+	            RedirectAttributes redirectAttributes) {
+	        
+	        String currentUsername = (String) session.getAttribute("username");
+	        try {
+	            UpdateMemberRequest request = new UpdateMemberRequest();
+	            request.setUsername(newUsername);
+	            request.setEmail(newEmail);
+	            request.setPassword(newPassword);
+	            request.setConfirmPassword(confirmPassword);
+	            request.setCurrentUsername(currentUsername);
+
+	            memberService.updateMember(request);
+	            
+	            // Update session with new username if changed
+	            if (!currentUsername.equals(newUsername)) {
+	                session.setAttribute("username", newUsername);
+	            }
+	            
+	            redirectAttributes.addFlashAttribute("message", "회원정보가 성공적으로 수정되었습니다.");
+	            return "redirect:/member/mypage";
+	        } catch (RuntimeException e) {
+	            redirectAttributes.addFlashAttribute("error", e.getMessage());
+	            return "redirect:/member/mypage";
+	        }
 	    }
 	//
 }

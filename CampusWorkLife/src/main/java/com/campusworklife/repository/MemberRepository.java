@@ -12,7 +12,8 @@ public interface MemberRepository extends JpaRepository<Member2,Integer> {
     @Query("SELECT m FROM Member2 m WHERE m.username = :username")
     Optional<Member2> findByUsername(@Param("username") String username);
     
-    
+	
+
  
 
 }

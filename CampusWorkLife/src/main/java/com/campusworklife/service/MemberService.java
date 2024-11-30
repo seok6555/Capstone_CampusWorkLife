@@ -1,9 +1,11 @@
 package com.campusworklife.service;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.campusworklife.dto.LoginRequest;
 import com.campusworklife.dto.LoginResponse;
+import com.campusworklife.dto.UpdateMemberRequest;
 import com.campusworklife.entity.Member2;
 import com.campusworklife.repository.MemberRepository;
 
@@ -39,4 +41,27 @@ public class MemberService {
 
         return new LoginResponse("로그인 성공", member.getUsername(), false);
     }
+    
+    @Transactional
+    public void updateMember(UpdateMemberRequest request) {
+        Member2 member = memberRepository.findByUsername(request.getCurrentUsername())
+                .orElseThrow(() -> new RuntimeException("사용자를 찾을 수 없습니다."));
+
+        // Update username and email
+        member.setUsername(request.getUsername());
+        member.setEmail(request.getEmail());
+
+        // Update password if provided
+        if (request.getPassword() != null && !request.getPassword().isEmpty()) {
+            if (!request.getPassword().equals(request.getConfirmPassword())) {
+                throw new RuntimeException("비밀번호와 비밀번호 확인이 일치하지 않습니다.");
+            }
+            member.setPw_hash(request.getPassword());
+        }
+
+        memberRepository.save(member);
+    }
+
+	
+
 }
