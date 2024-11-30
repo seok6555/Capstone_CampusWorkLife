@@ -12,11 +12,11 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.campusworklife.entity.EditHistory;
 import com.campusworklife.entity.Workplace;
@@ -34,19 +34,19 @@ public class InfoController {
 	@Autowired EditHistoryRepository editHistoryRepository;
 	ModelMapper modelMapper = new ModelMapper();
 	private boolean editMode = false;
+	private boolean isLogin = false;
 	
 	@GetMapping("infoPage")
 	public String infoPage(Model model, HttpSession session) {
 		// 로그인 체크
-        Boolean isLogin = (Boolean) session.getAttribute("loggedIn");
-        
-        if (isLogin == null || !isLogin) {
-            // 돌아갈 URL을 세션에 저장
-            session.setAttribute("returnUrl", "/suggest/create");
-            // 로그인되지 않은 경우 로그인 페이지로 리다이렉트
-            return "redirect:/member/login";
-        }
-        
+		Boolean isloggedIn = (Boolean) session.getAttribute("loggedIn");
+		
+		if (isloggedIn == null || !isloggedIn) {
+			isLogin = false;
+		} else {
+			isLogin = true;
+		}
+		
 		List<Workplace> workplaces = workplaceRepository.findAll();
 		
 		List<Map<String, Object>> workdays = workplaces.stream()
@@ -76,6 +76,12 @@ public class InfoController {
 //			return "info/infoPage";
 //		}
 //	}
+	
+	@GetMapping("/getLogin")
+	@ResponseBody
+    public Boolean getLogin() {
+        return isLogin;
+    }
 	
 	@PostMapping("infoPage")
 	public String save(@RequestParam String content) {
