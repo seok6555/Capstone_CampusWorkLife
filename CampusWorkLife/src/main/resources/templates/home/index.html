@@ -10,6 +10,10 @@
 	<body>
 		<nav th:replace="~{navbar/navbar :: navbarFragment}"></nav>
 		<img class="background" src="/images/background.png" alt="배경 이미지">
+		<div th:if="${username != null}">
+    <p th:text="'환영합니다, ' + ${username} + '님'"></p>
+    <!-- 로그아웃 버튼 등 추가 가능 -->
+</div>
 		<div class="scroll_icon">
 			<div class="icon">
 				<a href="info/infoPage">

@@ -1,99 +1,64 @@
 package com.campusworklife.controller;
 
-import java.util.Map;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.campusworklife.dto.LoginRequest;
-import com.campusworklife.entity.Member2;
+import com.campusworklife.dto.LoginResponse;
+import com.campusworklife.service.MemberService;
 
-
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
-
+import lombok.RequiredArgsConstructor;
 
 @Controller
 @RequestMapping("/member")
+@RequiredArgsConstructor
 public class MemberController {
 	
-	/*
-	@Autowired
-    private MemberService memberService;
-    
-    @PostMapping("/login")
-    public ResponseEntity<?> login(@RequestBody LoginRequest loginRequest, HttpSession session) {
-        try {
-            Member2 member = memberService.login(loginRequest.getUsername(), loginRequest.getPassword());
-            
-            // Store user info in session
-            session.setAttribute("userId", member.getId());
-            session.setAttribute("username", member.getUsername());
-            
-            return ResponseEntity.ok()
-                .body(Map.of(
-                    "message", "Login successful",
-                    "username", member.getUsername()
-                ));
-                
-        } catch (RuntimeException e) {
-            return ResponseEntity.badRequest()
-                .body(Map.of("error", e.getMessage()));
-        }
-    }
-    
-    @PostMapping("/logout")
-    public ResponseEntity<?> logout(HttpSession session) {
-        session.invalidate();
-        return ResponseEntity.ok()
-            .body(Map.of("message", "Logout successful"));
-    }
-	/*	
-    @Autowired 
-    private MemberRepository memberRepository; 
+	 private final MemberService memberService;
+	    
+	    @GetMapping("/login")
+	    public String loginForm() {
+	        return "member/login";  // login.html 뷰를 반환
+	    }
+	    @PostMapping("/login")
+	    public String login(@RequestParam("username") String username,
+	                       @RequestParam("pw_hash") String pw_hash,
+	                       HttpSession session,
+	                       HttpServletRequest request,
+	                       RedirectAttributes redirectAttributes) {
 
-    @Autowired
-    private PasswordEncoder passwordEncoder;
-    
-    
-    @GetMapping("/login")
-    public String loginPage(Model model) {
-        return "member/login";
-    }
-/*
-    @PostMapping("/login")
-    public String loginProcess(@RequestParam String username, 
-                             @RequestParam String password, 
-                             Model model) {
-    	System.out.println(username);
-    	System.out.println(password);
-        try {
-            // Spring Security가 자동으로 처리하므로 별도의 로직이 필요 없습니다
-        	System.out.println(username);
-        	System.out.println(password);
-            return "redirect:/suggest/list";
-        } catch (Exception e) {
-            model.addAttribute("error", "로그인에 실패했습니다.");
-            return "suggest/list";
-        }
-    } */
-  
-    /*
-    @PostMapping("/login")
-    @ResponseBody
-    public String encryptExistingPasswords() {
-        List<Member2> members = memberRepository.findAll();
-        for (Member2 member : members) {
-            // 암호화되지 않은 비밀번호만 암호화
-            if (!member.getPw_hash().startsWith("$2a$")) {
-                member.setPw_hash(passwordEncoder.encode(member.getPw_hash()));
-                memberRepository.save(member);
-            }
-        }
-        return "비밀번호 암호화 완료";
-    }
-    */
+	        System.out.println("==== 로그인 처리 시작 ====");
+	        System.out.println("Session ID: " + session.getId());
+	        System.out.println("요청 파라미터 - username: " + username);
+	        System.out.println("요청 파라미터 - pw_hash: " + pw_hash);
+
+	        try {
+	            LoginResponse response = memberService.login(new LoginRequest(username, pw_hash));
+	            // 디버깅을 위한 출력 추가
+	            System.out.println("로그인 응답: " + response);
+	            
+	            session.setAttribute("username", response.getUsername());
+	            session.setAttribute("loggedIn", true);
+
+	            System.out.println("로그인 성공 - 세션에 저장된 username: " + session.getAttribute("username"));
+	            System.out.println("로그인 상태: " + session.getAttribute("loggedIn"));
+
+	            return "redirect:/";
+	        } catch (RuntimeException e) {
+	            // 디버깅을 위한 출력 추가
+	            System.out.println("캐치 블록 진입");
+	            System.out.println("예외 내용: " + e.getMessage());
+	            System.out.println("로그인 실패: " + e.getMessage());
+	            
+	            redirectAttributes.addFlashAttribute("errorMessage", e.getMessage());
+	            return "redirect:member/login";
+	        }
+	    }
+	
 }

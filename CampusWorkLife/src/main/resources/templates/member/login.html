@@ -111,64 +111,73 @@
     <div class="content-wrapper">
         <div class="login-container">
             <h1 class="login-title">로그인</h1>
-          <form class="login-form" action="/member/login" method="post">
-                <div class="input-group">
-                     <input type="text" name="username" class="input-field" placeholder="이름">
-                </div>
-                <div class="input-group">
-                     <input type="password" name="pw_hash" class="input-field" placeholder="비밀번호">
-                </div>
-                <button type="submit" class="login-btn">로그인</button>
-                
-                <div class="checkbox-group">
-                    <input type="checkbox" id="auto-login">
-                    <label for="auto-login">자동로그인</label>
-                </div>
-
-                <div class="links">
-                    <a href="#">계정생성</a>
-                    <a href="#">계정 찾기</a>
-                    <a href="#">비밀번호 찾기</a>
-                </div>
-            </form>
-        </div>
+            <div th:if="${errorMessage}" class="alert alert-danger">
+    <p th:text="${errorMessage}"></p>
+</div>
+     <!-- 먼저 form의 action과 method를 명확하게 지정 -->
+<<form class="login-form" action="/member/login" method="post">
+    <div th:if="${errorMessage}" class="alert alert-danger">
+        <p th:text="${errorMessage}"></p>
     </div>
-   
+    <div class="input-group">
+        <input type="text" name="username" class="input-field" placeholder="이름" required>
+    </div>
+    <div class="input-group">
+        <input type="password" name="pw_hash" class="input-field" placeholder="비밀번호" required>
+    </div>
+    <button type="submit" class="login-btn">로그인</button>
+    
+    <div class="checkbox-group">
+        <input type="checkbox" id="auto-login">
+        <label for="auto-login">자동로그인</label>
+    </div>
+    <div class="links">
+        <a href="#">계정생성</a>
+        <a href="#">계정 찾기</a>
+        <a href="#">비밀번호 찾기</a>
+    </div>
+</form>
 
-    <script>
-        document.querySelector('.login-btn').addEventListener('click', function(e) {
-            e.preventDefault();
-            const id = document.querySelector('input[type="text"]').value;
-            const pw = document.querySelector('input[type="password"]').value;
-            const autoLogin = document.querySelector('#auto-login').checked;
+<script>
+    // 폼 제출 이벤트 리스너
+    document.querySelector('.login-form').addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        const username = document.querySelector('input[name="username"]').value;
+        const pw_hash = document.querySelector('input[name="pw_hash"]').value;
+        
+        // 콘솔에 로그 출력
+        console.log('로그인 시도:', { username, pw_hash: '***' });
+        
+        // FormData 객체 생성
+        const formData = new URLSearchParams();
+        formData.append('username', username);
+        formData.append('pw_hash', pw_hash);
 
-            if (!id || !pw) {
-                alert('아이디와 비밀번호를 모두 입력해주세요.');
-                return;
+        // fetch 요청
+        fetch('/member/login', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded'
+            },
+            body: formData
+        })
+        .then(response => {
+            console.log('서버 응답:', response.status);
+            if (response.ok) {
+                window.location.href = '/';
+            } else {
+                return response.text().then(text => {
+                    console.log('에러 응답:', text);
+                    throw new Error(text);
+                });
             }
-
-          fetch('/member/login', {
-    method: 'POST',
-    headers: {
-        'Content-Type': 'application/x-www-form-urlencoded'
-    },
-    body: new URLSearchParams({
-        'username': id,
-        'pw_hash': pw
-    })
-})
-            .then(response => {
-                if (response.ok) {
-                    window.location.href = '/';
-                } else {
-                    return response.text().then(text => { throw new Error(text); });
-                }
-            })
-            .catch(error => {
-                alert(`로그인 실패: ${error.message}`);
-            });
+        })
+        .catch(error => {
+            console.error('에러 발생:', error);
+            alert('로그인 실패: ' + error.message);
         });
-    </script>
-   
+    });
+</script>
 </body>
 </html>

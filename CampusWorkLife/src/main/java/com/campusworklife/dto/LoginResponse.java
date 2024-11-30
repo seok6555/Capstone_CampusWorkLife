@@ -2,12 +2,10 @@ package com.campusworklife.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
 @Data
 @AllArgsConstructor
-@NoArgsConstructor
-public class LoginRequest {
+public class LoginResponse {
+    private String message;
     private String username;
-    private String pw_hash;
 }
