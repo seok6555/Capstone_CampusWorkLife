@@ -52,6 +52,44 @@ public class MemberController {
 	                session.removeAttribute("returnUrl"); // 사용한 returnUrl 제거
 	                return "redirect:" + returnUrl;
 	            }
+	            
+	            
+	            
+	            
+	            
+	            
+	            
+	            
+	            
+	            
+	            
+	            
+	            
+	            
+	            
+	            
+	            
+	            
+	            
+	            
+	            
+	            
+	            
+	            
+	            
+	            
+	            
+	            
+	            
+	            
+	            
+	            
+	            
+	            
+	            
+	            
+	            
+	            
 	            System.out.println("로그인 성공 - 세션에 저장된 username: " + session.getAttribute("username"));
 	            System.out.println("로그인 상태: " + session.getAttribute("loggedIn"));
 
