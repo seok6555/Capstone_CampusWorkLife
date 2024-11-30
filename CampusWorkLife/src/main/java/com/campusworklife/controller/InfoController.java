@@ -84,11 +84,12 @@ public class InfoController {
     }
 	
 	@PostMapping("infoPage")
-	public String save(@RequestParam String content) {
+	public String save(@RequestParam String content, HttpSession session) {
 		try {
 			List<Workplace> workplaces = workplaceRepository.findAll();
 			Workplace workplace = new Workplace();
 			EditHistory editHistory = new EditHistory();
+			String username = (String) session.getAttribute("username");
 			
 			for (Workplace wp : workplaces) {
 				workplace.setId(wp.getId());
@@ -115,7 +116,7 @@ public class InfoController {
 			}
 			
 			for (Workplace wp : workplaces) {
-				editHistory.setUsername("수정자명");
+				editHistory.setUsername(username);
 				editHistory.setEdit_time(Timestamp.valueOf(LocalDateTime.now()));
 				editHistory.setContent(content);
 				editHistory.setWorkplace(wp);
