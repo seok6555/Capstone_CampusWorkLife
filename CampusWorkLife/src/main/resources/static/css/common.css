@@ -18,3 +18,12 @@ div.scroll_icon {
 	display: flex;
 	justify-content: center;
 }
+
+.swiper {
+	width: 70%;
+}
+.swiper-parent {
+	width: 80%;
+	position:relative;
+	margin: 0 auto;
+}
