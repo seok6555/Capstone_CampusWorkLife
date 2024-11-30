@@ -20,9 +20,9 @@
 				<div class="info_indexList">
 					<ol class="info_index fs-2">
 						<p class="fs-1">목차</p>
-						<li><a class="" href="#index1">목록</a></li>
-						<li><a class="" href="#index2">목록</a></li>
-						<li><a class="" href="#index3">목록</a></li>
+						<li><a class="" href="#index1">개요</a></li>
+						<li><a class="" href="#index2">하는 일</a></li>
+						<li><a class="" href="#index3">방법</a></li>
 						<li><a class="" href="#index4">목록</a></li>
 					</ol>
 				</div>
@@ -76,7 +76,7 @@
 								<p id="index1">
 									<div class="d-md-flex justify-content-md-between">
 									  	<button class="btn btn-lg index_btn" type="button" data-bs-toggle="collapse" data-bs-target="#collapseContext1" aria-expanded="false" aria-controls="collapseContext1">
-											목록
+											개요
 									  	</button>
 										<button class="btn btn-sm edit_btn" id="editButton" type="submit">편집</button>
 									</div>
@@ -92,7 +92,7 @@
 								<p id="index2">
 									<div class="d-md-flex justify-content-md-between">
 										<button class="btn btn-lg index_btn" type="button" data-bs-toggle="collapse" data-bs-target="#collapseContext2" aria-expanded="false" aria-controls="collapseContext2">
-											목록
+											하는 일
 										</button>
 										<button class="btn btn-sm edit_btn" id="editButton" type="submit">편집</button>
 									</div>
@@ -108,7 +108,7 @@
 								<p id="index3">
 									<div class="d-md-flex justify-content-md-between">
 										<button class="btn btn-lg index_btn" type="button" data-bs-toggle="collapse" data-bs-target="#collapseContext3" aria-expanded="false" aria-controls="collapseContext3">
-											목록
+											방법
 										</button>
 										<button class="btn btn-sm edit_btn" id="editButton" type="submit">편집</button>
 									</div>
@@ -155,7 +155,7 @@
 						if (data) {
 							cardComponent.innerHTML = `
 								<form method="post" th:action="@{/infoPage}">
-								<input type="text" id="content" name="content">
+								<input type="text" id="content" name="content" size="70">
 								<button class="btn btn-sm" id="saveButton" type="submit">저장</button>
 							`;
 							document.getElementById('content').value = text;
