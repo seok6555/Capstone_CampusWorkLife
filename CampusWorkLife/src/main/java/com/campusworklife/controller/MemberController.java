@@ -45,7 +45,13 @@ public class MemberController {
 	            
 	            session.setAttribute("username", response.getUsername());
 	            session.setAttribute("loggedIn", true);
-
+                
+	            // 저장된 returnUrl이 있는지 확인
+	            String returnUrl = (String) session.getAttribute("returnUrl");
+	            if (returnUrl != null) {
+	                session.removeAttribute("returnUrl"); // 사용한 returnUrl 제거
+	                return "redirect:" + returnUrl;
+	            }
 	            System.out.println("로그인 성공 - 세션에 저장된 username: " + session.getAttribute("username"));
 	            System.out.println("로그인 상태: " + session.getAttribute("loggedIn"));
 
@@ -57,7 +63,7 @@ public class MemberController {
 	            System.out.println("로그인 실패: " + e.getMessage());
 	            
 	            redirectAttributes.addFlashAttribute("errorMessage", e.getMessage());
-	            return "redirect:member/login";
+	            return "redirect:/member/login";
 	        }
 	    }
 	

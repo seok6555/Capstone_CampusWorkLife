@@ -24,6 +24,8 @@ import com.campusworklife.model.Pagination;
 import com.campusworklife.repository.MemberRepository;
 import com.campusworklife.repository.SuggestionRepository;
 
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
 import lombok.extern.slf4j.Slf4j;
 
 
@@ -84,31 +86,50 @@ public class SuggestionBoardController {
     //게시판 글쓰기(사용자)
     
     @GetMapping("/create")
-    public String createForm(Model model, Principal principal) {
-    	 model.addAttribute("title", "");
-    	    model.addAttribute("content", "");
-    	    if (principal != null) {
-    	        model.addAttribute("username", principal.getName());  // 로그인한 사용자 이름
-    	    }
-    	    return "suggest/create";
+    public String createForm(Model model, HttpSession session,HttpServletRequest request) {
+    	
+        // 로그인 체크
+        Boolean isLoggedIn = (Boolean) session.getAttribute("loggedIn");
+        if (isLoggedIn == null || !isLoggedIn) {
+            // 돌아갈 URL을 세션에 저장
+            session.setAttribute("returnUrl", "/suggest/create");
+            // 로그인되지 않은 경우 로그인 페이지로 리다이렉트
+            return "redirect:/member/login";
+        }
+        
+
+     // 로그인된 경우
+        String username = (String) session.getAttribute("username");
+        model.addAttribute("title", "");
+        model.addAttribute("content", "");
+        model.addAttribute("username", username);
+        
+        return "suggest/create";
     }
 
     @PostMapping("/create")
     public String create(@RequestParam String title,
-                        @RequestParam String content,
-                        @RequestParam String username,
-                        RedirectAttributes redirectAttributes,
-                        Model model) {
+            @RequestParam String content,
+            HttpSession session,
+            RedirectAttributes redirectAttributes,
+            Model model) {
         
+        // 로그인 체크
+        Boolean isLoggedIn = (Boolean) session.getAttribute("loggedIn");
+        if (isLoggedIn == null || !isLoggedIn) {
+            return "redirect:/member/login";
+        }
+        
+        String username = (String) session.getAttribute("username");
         log.info("받은 데이터 - 제목: {}, 내용: {}, 사용자명: {}", title, content, username);
-        
+
         try {
             // 입력값 검증
-            if (title.trim().isEmpty() || content.trim().isEmpty() || username.trim().isEmpty()) {
-                throw new IllegalArgumentException("모든 필드를 입력해주세요.");
+            if (title.trim().isEmpty() || content.trim().isEmpty()) {
+                throw new IllegalArgumentException("제목과 내용을 모두 입력해주세요.");
             }
-            
-            // 사용자 찾기 - 여기서 사용자를 찾지 못하면 로그를 남깁니다
+
+            // 사용자 찾기
             Optional<Member2> memberOptional = memberRepository.findByUsername(username);
             if (!memberOptional.isPresent()) {
                 log.error("사용자를 찾을 수 없습니다: {}", username);
