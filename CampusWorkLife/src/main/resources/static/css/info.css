@@ -63,6 +63,14 @@ ol.info_context_main_index li {
 }
 
 ol.info_context_main_index button {
-	font-size: xx-large;
+	
 	font-weight: bold;
+}
+
+button.index_btn {
+	font-size: xx-large;
+}
+
+button.edit_btn {
+	color:aqua;
 }
