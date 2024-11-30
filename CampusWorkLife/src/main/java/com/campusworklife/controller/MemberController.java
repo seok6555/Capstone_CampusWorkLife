@@ -1,5 +1,7 @@
 package com.campusworklife.controller;
 
+
+import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -11,15 +13,18 @@ import com.campusworklife.dto.LoginRequest;
 import com.campusworklife.dto.LoginResponse;
 import com.campusworklife.service.MemberService;
 
+import org.springframework.ui.Model;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
+
+
 
 @Controller
 @RequestMapping("/member")
 @RequiredArgsConstructor
 public class MemberController {
-	
+
 	 private final MemberService memberService;
 	    
 	    @GetMapping("/login")
@@ -52,44 +57,7 @@ public class MemberController {
 	                session.removeAttribute("returnUrl"); // 사용한 returnUrl 제거
 	                return "redirect:" + returnUrl;
 	            }
-	            
-	            
-	            
-	            
-	            
-	            
-	            
-	            
-	            
-	            
-	            
-	            
-	            
-	            
-	            
-	            
-	            
-	            
-	            
-	            
-	            
-	            
-	            
-	            
-	            
-	            
-	            
-	            
-	            
-	            
-	            
-	            
-	            
-	            
-	            
-	            
-	            
-	            
+	   
 	            System.out.println("로그인 성공 - 세션에 저장된 username: " + session.getAttribute("username"));
 	            System.out.println("로그인 상태: " + session.getAttribute("loggedIn"));
 
@@ -103,6 +71,25 @@ public class MemberController {
 	            redirectAttributes.addFlashAttribute("errorMessage", e.getMessage());
 	            return "redirect:/member/login";
 	        }
+	    }
+	    //마이페이지
+	    @GetMapping("/mypage")
+	    public String mypage(HttpSession session, Model model) {
+	        Boolean isLoggedIn = (Boolean) session.getAttribute("loggedIn");
+	        if (isLoggedIn == null || !isLoggedIn) {
+	            return "redirect:/member/login";
+	        }
+	        
+	        String username = (String) session.getAttribute("username");
+	        model.addAttribute("username", username);
+	        return "member/mypage";
+	    }
+
+	    //로그아웃
+	    @PostMapping("/logout")
+	    public String logout(HttpSession session) {
+	        session.invalidate();
+	        return "redirect:/";
 	    }
 	
 }
