@@ -32,9 +32,9 @@
 						<th>작성일</th>
 					</tr>
 				</thead>
-				<tbody>
+				<tbody class="suggest-admin-table">
 					<tr th:each="st : ${suggestions}">
-						<td th:text="${st.title}"></td>
+						<td><a th:href="@{/admin/suggestionAdminDetail/{id}(id=${st.id})}" th:text="${st.title}"></a></td>
 						<td th:text="${st.member2.username}"></td>
 						<td th:text="${st.formattedCreated}"></td>
 					</tr>

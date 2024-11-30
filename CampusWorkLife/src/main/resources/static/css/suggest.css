@@ -112,3 +112,22 @@ strong {
 .navigation {
 	margin-top: 20px;
 }
+
+.admin-comment{
+	padding-top: 50px;
+}
+
+.comment-box{
+	padding: 10px;
+	border: 2px solid rgb(238, 238, 238);
+}
+
+.comment-box button{
+	background-color: rgb(0, 173, 173); 
+    color: white; 
+    border: none;
+    padding: 8px 15px; 
+    cursor: pointer;
+    font-size: 15px; 
+    border-radius: 5px;
+}

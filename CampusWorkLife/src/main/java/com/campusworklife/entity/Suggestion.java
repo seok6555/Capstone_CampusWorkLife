@@ -24,7 +24,6 @@ public class Suggestion {
 	    private String content;           // 내용
 	    private  LocalDateTime created;        // 등록일
 	    private String state;             // 상태 (progress or completed)
-	    private String adminContent;	  //관리자 답변	
 	    
 	
        @ManyToOne

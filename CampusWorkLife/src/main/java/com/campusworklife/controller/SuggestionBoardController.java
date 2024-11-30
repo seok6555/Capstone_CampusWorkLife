@@ -41,7 +41,6 @@ public class SuggestionBoardController {
 	 검색기능 추가로 필요..
 	 
 	 
-	 
 	 */
 	
 	@Autowired SuggestionRepository suggestionRepository;

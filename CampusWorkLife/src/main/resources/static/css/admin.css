@@ -116,3 +116,12 @@ h1.admin-title {
     border-radius: 5px;
 }
 
+.suggest-admin-table a{
+	text-decoration: none;
+	color: black;
+}
+
+.suggest-admin-table a:hover{
+	color: rgb(0, 173, 181);
+}
+
