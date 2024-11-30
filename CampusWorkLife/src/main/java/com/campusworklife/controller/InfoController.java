@@ -23,6 +23,7 @@ import com.campusworklife.entity.Workplace;
 import com.campusworklife.repository.EditHistoryRepository;
 import com.campusworklife.repository.WorkplaceRepository;
 
+import jakarta.servlet.http.HttpSession;
 import lombok.extern.slf4j.Slf4j;
 
 @Controller
@@ -35,7 +36,17 @@ public class InfoController {
 	private boolean editMode = false;
 	
 	@GetMapping("infoPage")
-	public String infoPage(Model model) {
+	public String infoPage(Model model, HttpSession session) {
+		// 로그인 체크
+        Boolean isLogin = (Boolean) session.getAttribute("loggedIn");
+        
+        if (isLogin == null || !isLogin) {
+            // 돌아갈 URL을 세션에 저장
+            session.setAttribute("returnUrl", "/suggest/create");
+            // 로그인되지 않은 경우 로그인 페이지로 리다이렉트
+            return "redirect:/member/login";
+        }
+        
 		List<Workplace> workplaces = workplaceRepository.findAll();
 		
 		List<Map<String, Object>> workdays = workplaces.stream()
