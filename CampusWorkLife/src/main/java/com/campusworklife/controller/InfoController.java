@@ -32,6 +32,7 @@ public class InfoController {
 	@Autowired WorkplaceRepository workplaceRepository;
 	@Autowired EditHistoryRepository editHistoryRepository;
 	ModelMapper modelMapper = new ModelMapper();
+	private boolean editMode = false;
 	
 	@GetMapping("infoPage")
 	public String infoPage(Model model) {
@@ -48,11 +49,25 @@ public class InfoController {
 		
 		model.addAttribute("workplaces", workplaces);
 		model.addAttribute("workdays", workdays);
+		model.addAttribute("editMode", editMode);
 		return "info/infoPage";
 	}
 	
+//	@PostMapping("infoPage")
+//	public String edit(Model model) {
+//		try {
+//			editMode = true;
+//			model.addAttribute("editMode", editMode);
+//			return "info/infoPage";
+//			
+//		} catch (Exception e) {
+//			log.error("errorMsg", e.getMessage());
+//			return "info/infoPage";
+//		}
+//	}
+	
 	@PostMapping("infoPage")
-	public String edit(@RequestParam String content) {
+	public String save(@RequestParam String content) {
 		try {
 			List<Workplace> workplaces = workplaceRepository.findAll();
 			Workplace workplace = new Workplace();
@@ -92,7 +107,7 @@ public class InfoController {
 			
 			Workplace saveWorkplace = workplaceRepository.save(workplace);
 			EditHistory saveEditHistory = editHistoryRepository.save(editHistory);
-			
+			editMode = false;
             return "redirect:infoPage";
 
 		} catch (Exception e) {

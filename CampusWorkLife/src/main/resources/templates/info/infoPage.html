@@ -73,11 +73,13 @@
 					<div class="info_context_main">
 						<ol class="info_context_main_index">
 							<li>
-								<p class="d-inline-flex gap-1 d-md-flex justify-content-md-between" id="index1">
-								  	<button class="btn btn-lg" type="button" data-bs-toggle="collapse" data-bs-target="#collapseContext1" aria-expanded="false" aria-controls="collapseContext1">
-										목록
-								  	</button>
-									<button class="btn btn-sm" type="button">편집</button>
+								<p id="index1">
+									<div class="d-md-flex justify-content-md-between">
+									  	<button class="btn btn-lg index_btn" type="button" data-bs-toggle="collapse" data-bs-target="#collapseContext1" aria-expanded="false" aria-controls="collapseContext1">
+											목록
+									  	</button>
+										<button class="btn btn-sm edit_btn" id="editButton" type="submit">편집</button>
+									</div>
 								</p>
 								<hr>
 							</li>
@@ -85,17 +87,15 @@
 								<div class="card card-body" th:text="${wp.content}">
 									근로 내용
 								</div>
-								<form method="post" th:action="@{/info/infoPage}">
-								<input type="text" id="content" name="content">
-								<button type="submit">저장</button>
-									
-								</form>
 							</div>
 							<li>
-								<p class="d-inline-flex gap-1" id="index2">
-									<button class="btn btn-lg" type="button" data-bs-toggle="collapse" data-bs-target="#collapseContext2" aria-expanded="false" aria-controls="collapseContext2">
-										목록
-									</button>
+								<p id="index2">
+									<div class="d-md-flex justify-content-md-between">
+										<button class="btn btn-lg index_btn" type="button" data-bs-toggle="collapse" data-bs-target="#collapseContext2" aria-expanded="false" aria-controls="collapseContext2">
+											목록
+										</button>
+										<button class="btn btn-sm edit_btn" id="editButton" type="submit">편집</button>
+									</div>
 								</p>
 								<hr>
 							</li>
@@ -105,10 +105,13 @@
 								</div>
 							</div>
 							<li>
-								<p class="d-inline-flex gap-1" id="index3">
-									<button class="btn btn-lg" type="button" data-bs-toggle="collapse" data-bs-target="#collapseContext3" aria-expanded="false" aria-controls="collapseContext3">
-										목록
-									</button>
+								<p id="index3">
+									<div class="d-md-flex justify-content-md-between">
+										<button class="btn btn-lg index_btn" type="button" data-bs-toggle="collapse" data-bs-target="#collapseContext3" aria-expanded="false" aria-controls="collapseContext3">
+											목록
+										</button>
+										<button class="btn btn-sm edit_btn" id="editButton" type="submit">편집</button>
+									</div>
 								</p>
 								<hr>
 							</li>
@@ -118,10 +121,13 @@
 								</div>
 							</div>
 							<li>
-								<p class="d-inline-flex gap-1" id="index4">
-									<button class="btn btn-lg" type="button" data-bs-toggle="collapse" data-bs-target="#collapseContext4" aria-expanded="false" aria-controls="collapseContext4">
-										목록
-									</button>
+								<p id="index4">
+									<div class="d-md-flex justify-content-md-between">
+										<button class="btn btn-lg index_btn" type="button" data-bs-toggle="collapse" data-bs-target="#collapseContext4" aria-expanded="false" aria-controls="collapseContext4">
+											목록
+										</button>
+										<button class="btn btn-sm edit_btn" id="editButton" type="submit">편집</button>
+									</div>
 								</p>
 								<hr>
 							</li>
@@ -135,6 +141,24 @@
 				</div>
 			</div>
 		</div>
-		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous">
+		</script>
+		<script>
+			document.getElementById('editButton').addEventListener('click', function () {
+				// Get the card and the current text
+			    const cardText = document.getElementById('cardText');
+			    const cardComponent = document.getElementById('collapseContext1');
+					
+				cardComponent.innerHTML = `
+					<form method="post" th:action="@{/infoPage}">
+					<input type="text" id="content" name="content">
+					<button class="btn btn-sm" id="saveButton" type="submit">저장</button>
+				`;
+					
+				document.getElementById('saveButton').addEventListener('click', function () {
+					alert("저장되었습니다.");
+				});
+			});
+		</script>
 	</body>
 </html>
